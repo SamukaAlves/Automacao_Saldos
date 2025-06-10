@@ -27,7 +27,7 @@ Aplicação Python para consultar e salvar diariamente o extrato bancário de co
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/bb-extrato.git
+git clone https://github.com/SamukaAlves/Automacao_Saldos.git
 cd bb-extrato
 Crie e ative um ambiente virtual (opcional, mas recomendado):
 
@@ -37,9 +37,9 @@ venv\Scripts\activate     # Windows
 Instale as dependências:
 
 pip install -r requirements.txt
+
 🔐 Arquivo .env
 Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
-
 .env:
 CLIENT_ID=seu_client_id_aqui
 CLIENT_SECRET=seu_client_secret_aqui
