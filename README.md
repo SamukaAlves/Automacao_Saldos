@@ -1,16 +1,17 @@
 # 📄 BB Extrato Automático
 
-Aplicação Python para consultar e salvar diariamente o extrato bancário de contas do Banco do Brasil, utilizando a API oficial do BB (via portal BB Developers).
+Automação em Python para consultar extratos bancários de múltiplas contas do Banco do Brasil via API oficial (BB Developers), salvar o resultado em JSON consolidado e enviar o extrato formatado por e-mail.
 
 ---
 
 ## ✅ Funcionalidades
 
-- Autenticação via OAuth2 (client credentials)
-- Consulta ao extrato bancário por intervalo de datas
+- Autenticação OAuth2 (client credentials)
+- Consulta de extrato bancário por período (padrão: mês atual)
 - Suporte a múltiplas contas
-- Salvamento em arquivo `.json` com data do dia
-- Leitura de credenciais e dados sensíveis a partir de variáveis de ambiente (`.env`)
+- Salvamento do extrato consolidado em arquivo `.json`
+- Envio automático do extrato formatado no corpo do e-mail (um resumo por conta)
+- Leitura de credenciais e dados sensíveis via `.env`
 
 ---
 
@@ -28,55 +29,68 @@ Aplicação Python para consultar e salvar diariamente o extrato bancário de co
 1. Clone o repositório:
 ```bash
 git clone https://github.com/SamukaAlves/Automacao_Saldos.git
-cd bb-extrato
-Crie e ative um ambiente virtual (opcional, mas recomendado):
-
+cd Automacao_Extratos
+```
+2. Crie e ative um ambiente virtual (opcional, mas recomendado):
+```bash
 python -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-Instale as dependências:
-
+# Linux/macOS:
+source venv/bin/activate
+# Windows:
+venv\Scripts\activate
+```
+3. Instale as dependências:
+```bash
 pip install -r requirements.txt
+```
 
-🔐 Arquivo .env
-Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
-.env:
-CLIENT_ID=seu_client_id_aqui
-CLIENT_SECRET=seu_client_secret_aqui
+---
 
-# Contas para consulta
-CONTA_1_AGENCIA=1234
-CONTA_1_NUMERO=56789
+## 🔐 Configuração do `.env`
 
-CONTA_2_AGENCIA=1111
-CONTA_2_NUMERO=22222
+Crie um arquivo `.env` na raiz do projeto com o seguinte formato:
 
-▶️ Como Usar
+```
+CLIENT_ID=seu_client_id
+CLIENT_SECRET=seu_client_secret
+APP_KEY=sua_app_key
+EMAIL=seu_email@gmail.com
+EMAIL_PASSWORD=sua_senha_de_aplicativo
+CONTAS=[{"agencia": "1234", "numero": "56789"}, {"agencia": "1111", "numero": "22222"}]
+DESTINATARIOS=["destinatario1@email.com", "destinatario2@email.com"]
+```
+
+- `CONTAS` e `DESTINATARIOS` devem ser listas em formato JSON.
+- Recomenda-se usar senha de aplicativo para o Gmail.
+
+---
+
+## ▶️ Como Usar
+
 Execute o script principal:
+```bash
+python main.py
+```
+- O extrato consolidado será salvo em `extratos/extrato_bb_consolidado_<data>.json`.
+- O e-mail será enviado automaticamente para os destinatários configurados, com o extrato formatado no corpo e o JSON em anexo.
 
-python extrato.py
-O extrato será salvo como:
-extrato_2025-06-09.json
+---
 
-🧪 Testes com Postman
-Você pode testar os endpoints da API diretamente no Postman. A coleção pronta está disponível no arquivo:
+## ⚠️ Observações
 
-bb_extrato_sandbox.postman_collection.json
+- O script está configurado para ambiente **sandbox** do BB. Para produção, ajuste as URLs e credenciais conforme necessário.
+- Não há geração de arquivos Excel ou CSV.
+- O período padrão é o dia atual, mas pode ser facilmente alterado no código.
 
-⚠️ Observações
-Esta aplicação usa o ambiente sandbox do BB.
+---
 
-Para acesso real, é necessário:
+## 📄 Licença
 
-Certificado digital A1
-
-Aprovação formal do BB
-
-Gerente de relacionamento para intermediar o processo
-
-📄 Licença
 Este projeto é open-source sob a licença MIT. Veja o arquivo LICENSE para mais informações.
 
-📬 Contato
-Desenvolvido por Samuel Lima Alves
+---
+
+## 📬 Contato
+
+Desenvolvido por Samuel Lima Alves  
 Email: contatosamuel.lima23@gmail.com
