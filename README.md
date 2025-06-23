@@ -7,7 +7,7 @@ Automação em Python para consultar extratos bancários de múltiplas contas do
 ## ✅ Funcionalidades
 
 - Autenticação OAuth2 (client credentials)
-- Consulta de extrato bancário por período (padrão: mês atual)
+- Consulta de extrato bancário por período (padrão: dia atual)
 - Suporte a múltiplas contas
 - Salvamento do extrato consolidado em arquivo `.json`
 - Envio automático do extrato formatado no corpo do e-mail (um resumo por conta)
